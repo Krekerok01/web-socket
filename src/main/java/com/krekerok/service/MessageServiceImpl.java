@@ -49,7 +49,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Message> findAllMessagesByReceiver(String receiver) {
         Optional<User> optReceiver = userRepository.findByUsername(receiver);
-        return optReceiver.isEmpty() ? new LinkedList<>() : messageRepository.findAllByReceiver(optReceiver.get());
+        return !(optReceiver.isPresent()) ? new LinkedList<>() : messageRepository.findAllByReceiver(optReceiver.get());
     }
 
 }
